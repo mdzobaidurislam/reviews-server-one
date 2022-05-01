@@ -43,6 +43,7 @@ router.route("/product/:id").delete(deleteProduct);
 // login
 router.post("/login", userLogin);
 router.get("/verifyUser", verifyUser);
+// router.get("/verifyUser", verifyUser);
 // category
 
 router.get("/categoryCount", categoryCount);
