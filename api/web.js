@@ -37,13 +37,13 @@ router
 
 // product
 router.get("/productCount", productCount);
-router.route("/product").get(apiMiddleware, getProduct).post(addProduct);
+router.route("/product").get(getProduct).post(addProduct);
 router.route("/product/:id").delete(deleteProduct);
+// router.route("/product/:id").delete(deleteProduct);
 
 // login
 router.post("/login", userLogin);
 router.get("/verifyUser", verifyUser);
-// router.get("/verifyUser", verifyUser);
 // category
 
 router.get("/categoryCount", categoryCount);
