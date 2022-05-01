@@ -37,11 +37,7 @@ const userLogin = async (req, res) => {
             expiresIn: "1d",
           });
           res.json({
-            // sucess: true,
             email: result.email,
-            // _id: result._id,
-            // role: result.role,
-            // isAdmin: result.isAdmin,
             accessToken: accessToken,
           });
         } else {
