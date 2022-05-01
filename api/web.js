@@ -39,7 +39,6 @@ router
 router.get("/productCount", productCount);
 router.route("/product").get(getProduct).post(addProduct);
 router.route("/product/:id").delete(deleteProduct);
-// router.route("/product/:id").delete(deleteProduct);
 
 // login
 router.post("/login", userLogin);
