@@ -64,6 +64,48 @@ const addProduct = async function (req, res) {
     });
   }
 };
+// edit
+const EditProduct = async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const query = { _id: ObjectId(id) };
+  const dbConnect = await dbo.getDb();
+  const result = await dbConnect.collection("product").findOne(query);
+  if (result) {
+    console.log(result);
+    res.json(result);
+  } else {
+    res.json({
+      msg: "Product not found!",
+    });
+  }
+};
+
+// update
+const UpdateProduct = async (req, res) => {
+  const id = req.params.id;
+  const updateProduct = req.body;
+  // console.log(updateUser);
+  const filter = { _id: ObjectId(id) };
+  const options = { upsert: true };
+  const updateDoc = {
+    $set: updateProduct,
+  };
+  const dbConnect = await dbo.getDb();
+  const result = await dbConnect
+    .collection("product")
+    .updateOne(filter, updateDoc, options);
+  if (result) {
+    res.status(200);
+    res.json({
+      msg: "Prodcut Update successfully!",
+    });
+  } else {
+    res.json({
+      msg: "Prodcut not found!",
+    });
+  }
+};
 
 // delete
 const deleteProduct = async (req, res) => {
@@ -86,10 +128,26 @@ const deleteProduct = async (req, res) => {
   } catch (error) {}
 };
 
+// client product
+const clientProduct = async function (req, res) {
+  try {
+    const dbConnect = await dbo.getDb();
+
+    let products;
+    const curser = dbConnect.collection("product");
+    const query = {};
+    products = await curser.find(query).toArray();
+    res.json(products);
+  } catch (error) {}
+};
+
 module.exports = {
   getProduct,
   addProduct,
   productCount,
   addProduct,
+  EditProduct,
+  UpdateProduct,
   deleteProduct,
+  clientProduct,
 };

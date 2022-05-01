@@ -21,7 +21,6 @@ const apiMiddleware = async (req, res, next) => {
 
 const userLogin = async (req, res) => {
   try {
-    console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
     const query = { email: email };

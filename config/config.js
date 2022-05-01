@@ -1,10 +1,16 @@
 const { MongoClient } = require("mongodb");
 
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.1wbmx.mongodb.net/mongodb-review-electron-shop?retryWrites=true&w=majority`;
+const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri, {
-  useNewUrlParser: true,
   useUnifiedTopology: true,
+  useNewUrlParser: true,
 });
+
+// const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.1wbmx.mongodb.net/mongodb-review-electron-shop?retryWrites=true&w=majority`;
+// const client = new MongoClient(uri, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 let dbConnection;
 

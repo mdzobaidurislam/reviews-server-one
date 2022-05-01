@@ -3,12 +3,18 @@ const {
   addCategory,
   getCategory,
   categoryCount,
+  deleteCategory,
+  EditCategory,
+  UpdateCategory,
 } = require("../routes/category");
 const {
   getProduct,
   addProduct,
   productCount,
+  EditProduct,
   deleteProduct,
+  UpdateProduct,
+  clientProduct,
 } = require("../routes/products");
 const {
   addReview,
@@ -24,9 +30,6 @@ const router = express.Router();
 router.get("/reviewCount", reviewCount);
 router.get("/review", getReviews);
 router.post("/review", addReview);
-// router.delete("/review/:id", deleteReview);
-// router.get("/review/:id", EditReview);
-// router.put("/update-review/:id", UpdateReview);
 
 // review
 router
@@ -36,16 +39,26 @@ router
   .put(UpdateReview);
 
 // product
+router.get("/clientproduct", clientProduct);
 router.get("/productCount", productCount);
-router.route("/product").get(getProduct).post(addProduct);
-router.route("/product/:id").delete(deleteProduct);
+router.route("/product").get(apiMiddleware, getProduct).post(addProduct);
+router
+  .route("/product/:id")
+  .delete(deleteProduct)
+  .get(EditProduct)
+  .put(UpdateProduct);
 
 // login
 router.post("/login", userLogin);
 router.get("/verifyUser", verifyUser);
-// category
 
+// category
 router.get("/categoryCount", categoryCount);
 router.route("/category").get(getCategory).post(addCategory);
+router
+  .route("/category/:id")
+  .delete(deleteCategory)
+  .get(EditCategory)
+  .put(UpdateCategory);
 
 module.exports = router;
